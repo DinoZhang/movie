@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- <Context> 
+    <Resource name="jdbc/movie" 
+  auth="Container" 
+              type="javax.sql.DataSource" 
+              driverClassName="com.mysql.jdbc.Driver" 
+              url="jdbc:mysql://127.0.0.1/movie" 
+              username="root" 
+              password="" 
+              maxActive="20" 
+              maxIdle="10" 
+              maxWait="-1"/> 
+</Context>  -->
+<Context>
+          <Resource name="jdbc/movie" auth="Container" type="javax.sql.DataSource"
+                        username="root"
+                        password=""
+                        driverClassName="com.mysql.jdbc.Driver"
+                        url="jdbc:mysql://localhost:3306/movie"
+                        maxActive="15"
+                        maxIdle="7"
+                        defaultTransactionIsolation="READ_COMMITTED"
+                        validationQuery="Select 1" />
+        </Context>
