@@ -1,4 +1,4 @@
-/*package com.ibm.taste.example.movie.init;
+package com.ibm.taste.example.movie.init;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,13 +20,13 @@ public class ImportMovies {
 	public final static String PUBLISHED_YEAR_COLUMN = "published_year";
 	public final static String TYPE_COLUMN = "type";
 
-	*//**
+	/**
 	 * @param args
-	 *//*
+	 */
 	public static void main(String[] args) {
 		try {
 			LineNumberReader lineReader = new LineNumberReader(new FileReader(
-					"D:\\develop\\MovieSite\\movie\\WEB-INF\\src\\com\\ibm\\taste\\example\\movie\\utils\\movies.dat"));
+					"/Users/leinuo/desktop/movies.dat"));
 			String line = "";
 			List<Movie> movieList = new ArrayList<Movie>();
 			while ((line = lineReader.readLine()) != null) {
@@ -44,7 +44,7 @@ public class ImportMovies {
 
 	private static void persist(List<Movie> movies) {
 
-		Connection conn = DBUtil.getJDBCConnection();
+		Connection conn = DBUtil.getConnection();
 		PreparedStatement ps = null;
 		String sql = "insert into " + TABLE_NAME + " ( " + ID_COLUMN + ", "
 				+ NAME_COLUMN + ", " + PUBLISHED_YEAR_COLUMN + ", "
@@ -59,6 +59,7 @@ public class ImportMovies {
 				ps.setString(2, movie.getName());
 				ps.setString(3, movie.getYear());
 				ps.setString(4, StringUtil.connectString(movie.getType(), ", "));
+				//System.out.print("add");
 				ps.addBatch();
 			}
 
@@ -92,4 +93,3 @@ public class ImportMovies {
 		return movie;
 	}
 }
-*/

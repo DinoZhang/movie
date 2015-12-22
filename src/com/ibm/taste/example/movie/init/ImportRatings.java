@@ -1,4 +1,4 @@
-/*package com.ibm.taste.example.movie.init;
+package com.ibm.taste.example.movie.init;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,12 +21,12 @@ public class ImportRatings {
 	public final static String MOVIE_ID_COLUMN = "movieID";
 	public final static String RATING = "preference";
 	public final static String TIMESTAMP = "timestamp";
-	*//**
+	/**
 	 * @param args
-	 *//*
+	 */
 	public static void main(String[] args) {
 		try {
-			LineNumberReader lineReader = new LineNumberReader(new FileReader("D:\\develop\\MovieSite\\movie\\WEB-INF\\src\\com\\ibm\\taste\\example\\movie\\utils\\ratings.dat"));
+			LineNumberReader lineReader = new LineNumberReader(new FileReader("/Users/leinuo/desktop/1/ratings.dat"));
 			String line = "";
 			List<Rating> ratingList = new ArrayList<Rating>();
 			while ((line = lineReader.readLine()) != null) {
@@ -55,7 +55,7 @@ public class ImportRatings {
 
 
 	public static void insertRatings(List<Rating> ratings) {
-		Connection conn = DBUtil.getJDBCConnection();
+		Connection conn = DBUtil.getConnection();
 		PreparedStatement ps = null;
 		String sql = "insert into " + TABLE_NAME + " ( " + USER_ID_COLUMN
 				+ ", " + MOVIE_ID_COLUMN + ", " + RATING + ", " + TIMESTAMP
@@ -70,9 +70,10 @@ public class ImportRatings {
 				ps.setInt(2, rating.getMovie_id());
 				ps.setInt(3, rating.getRating());
 				ps.setInt(4, rating.getTimestamp());
+				System.out.println("add");
 				ps.addBatch();
 			}
-            System.out.println("Íê³É");
+            
 			ps.executeBatch();
 			conn.commit();
 		} catch (SQLException e) {
@@ -81,10 +82,10 @@ public class ImportRatings {
 			try {
 				ps.close();
 				conn.close();
+				System.out.println("success");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 }
-*/
